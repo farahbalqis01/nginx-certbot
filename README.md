@@ -20,7 +20,7 @@ This is a replacement of the `docker-compose` package that may be installed with
 
 # Initial steps to reuse repository.
 
-1. All configuration files can be obtained from the `nginx-certbot` submodule folder. If in doubt, find all instances of the `example.org` and replace with new domain in `init-letsencrypt.sh`, `docker-compose.yml`, and `.data/nginx/app.conf`.
+1. All configuration files can be obtained from the `nginx-certbot` submodule folder. Find all instances of the `example.org` and replace with new domain in `init-letsencrypt.sh`, `docker-compose.yml`, and `.data/nginx/app.conf`.
 2. Set email address in `init-letsencrypt.sh` with contact of person responsible for the website.
 3. In this project, the web folder is placed in `./data/web`. Replace all contents in this folder with the site files.
 
