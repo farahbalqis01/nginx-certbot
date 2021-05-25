@@ -1,33 +1,43 @@
-# Boilerplate for nginx with Let’s Encrypt on docker-compose
+# Introduction
 
-> This repository is accompanied by a [step-by-step guide on how to
-set up nginx and Let’s Encrypt with Docker](https://medium.com/@pentacent/nginx-and-lets-encrypt-with-docker-in-less-than-5-minutes-b4b8a60d3a71).
+This is a modified fork for [nginx-certbot](https://github.com/wmnnd/nginx-certbot) that can be used as a template for deploying static websites quickly on a server using Docker with nginx and Let's Encrypt. The Docker compose file will also check and auto-renew certificates if they need to be reprovisioned.
 
-`init-letsencrypt.sh` fetches and ensures the renewal of a Let’s
-Encrypt certificate for one or multiple domains in a docker-compose
-setup with nginx.
-This is useful when you need to set up nginx as a reverse proxy for an
-application.
+The web root is found in `./data/web`. This project allows the deployment of an https site secured with Let's Encrypt using Docker.
 
-## Installation
-1. [Install docker-compose](https://docs.docker.com/compose/install/#install-compose).
+A guide to how everything fits together can be found [here](https://medium.com/@pentacent/nginx-and-lets-encrypt-with-docker-in-less-than-5-minutes-b4b8a60d3a71).
 
-2. Clone this repository: `git clone https://github.com/wmnnd/nginx-certbot.git .`
+# Dependencies
 
-3. Modify configuration:
-- Add domains and email addresses to init-letsencrypt.sh
-- Replace all occurrences of example.org with primary domain (the first one you added to init-letsencrypt.sh) in data/nginx/app.conf
+## Docker
 
-4. Run the init script:
+* [Follow the installation guide to install Docker.](https://docs.docker.com/engine/install/)
 
-        ./init-letsencrypt.sh
+* Follow [post installation steps](https://docs.docker.com/engine/install/linux-postinstall/) in the official Docker guide so the user does not need to invoke sudo. Permission issues may follow if executing the scripts with sudo privileges.
 
-5. Run the server:
+## Docker Compose
 
-        docker-compose up
+This is a replacement of the `docker-compose` package that may be installed with Docker. Docker compose should be updated explicitly using the [official guide](https://docs.docker.com/compose/install/#alternative-install-options) as the default installed version is not up to date, resulting in compatibility issues.
 
-## Got questions?
-Feel free to post questions in the comment section of the [accompanying guide](https://medium.com/@pentacent/nginx-and-lets-encrypt-with-docker-in-less-than-5-minutes-b4b8a60d3a71)
+# Initial steps to reuse repository.
 
-## License
-All code in this repository is licensed under the terms of the `MIT License`. For further information please refer to the `LICENSE` file.
+1. All configuration files can be obtained from the `nginx-certbot` submodule folder. If in doubt, find all instances of the `example.org` and replace with new domain in `init-letsencrypt.sh`, `docker-compose.yml`, and `.data/nginx/app.conf`.
+2. Set email address in `init-letsencrypt.sh` with contact of person responsible for the website.
+3. In this project, the web folder is placed in `./data/web`. Replace all contents in this folder with the site files.
+
+# Execution to build site
+
+None of these commands require sudo privileges. Make sure dependencies are installed and initial steps have been completed.
+
+1. Run `./init-letsencrypt.sh`. If errors occur here in certificate retrieval, open the script and change staging to 0 before continuing to debug. Let's Encrypt will allow up to 20 certificate retrievals before imposing a 7-day suspension on the domain's certificate generation process.
+
+2. Run `docker-compose up` to check if site is properly deployed. Add `-d` to the options to run in detached mode after confirming site works.
+
+# Quick commands
+
+## Stop all containers
+
+`docker-compose stop`
+
+## Start container and rebuild if changes made
+
+`docker-compose up --build -d`
