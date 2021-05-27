@@ -1,5 +1,7 @@
 # Introduction
 
+To be modified for use with Farah's website
+
 This is a modified fork for [nginx-certbot](https://github.com/wmnnd/nginx-certbot) that can be used as a template for deploying static websites quickly on a server using Docker with nginx and Let's Encrypt. The Docker compose file will also check and auto-renew certificates if they need to be reprovisioned.
 
 The web root is found in `./data/web`. This project allows the deployment of an https site secured with Let's Encrypt using Docker.
