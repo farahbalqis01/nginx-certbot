@@ -546,7 +546,7 @@ pre code {
 .container-lg,
 .container-md,
 .container-sm {
-  width: 100%;
+  width: 300%;
   padding-right: 1.5rem;
   padding-left: 1.5rem;
   margin-right: auto;
