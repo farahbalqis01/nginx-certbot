@@ -598,6 +598,7 @@ pre code {
 .col-auto, .col-12, .col-11, .col-10, .col-9, .col-8, .col-7, .col-6, .col-5, .col-4, .col-3, .col-2, .col-1 {
   position: relative;
   width: 100%;
+  height: auto;
   padding-right: 1.5rem;
   padding-left: 1.5rem;
 }
@@ -5449,7 +5450,7 @@ a.close.disabled {
   position: relative;
   display: flex;
   flex-direction: column;
-  width: 500%;
+  width: 100%;
   pointer-events: auto;
   background-color: #fff;
   background-clip: padding-box;
